@@ -1,7 +1,7 @@
 from src.masks import get_mask_card_number, get_mask_account
 
 def mask_account_card(card_information: str) -> str:
-    """Обрабатывает и маскирует информацию о картах и счетах"""
+    """Функция для обработки и маскировки информации о картах и счетах"""
     card_or_account_num = []
     card_name = []
     shared_information = card_information.split(" ")
@@ -24,3 +24,11 @@ print(mask_account_card("Visa Classic 6831982476737658"))
 print(mask_account_card("Visa Platinum 8990922113665229"))
 print(mask_account_card("Visa Gold 5999414228426353"))
 print(mask_account_card("Счет 73654108430135874305"))
+
+
+def get_date (date: str) -> str:
+    """Функция для форматирования даты"""
+    return f"{date[8:10]}.{date[5:7]}.{date[0:4]}"
+
+print(get_date("2024-03-11T02:26:18.671407"))
+
