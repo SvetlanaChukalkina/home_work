@@ -1,0 +1,26 @@
+from src.masks import get_mask_card_number, get_mask_account
+
+def mask_account_card(card_information: str) -> str:
+    """Обрабатывает и маскирует информацию о картах и счетах"""
+    card_or_account_num = []
+    card_name = []
+    shared_information = card_information.split(" ")
+    for i in shared_information:
+        if i.isdigit():
+            card_or_account_num.append(i)
+        if i.isalpha():
+            card_name.append(i)
+    number_for_mask = "".join(card_or_account_num)
+    name_for_mask = " ".join(card_name)
+    if name_for_mask == "Счет":
+        return f"{name_for_mask} {get_mask_account(number_for_mask)}"
+    else:
+        return f"{name_for_mask} {get_mask_card_number(number_for_mask)}"
+
+print(mask_account_card("Maestro 1596837868705199"))
+print(mask_account_card("Счет 64686473678894779589"))
+print(mask_account_card("MasterCard 7158300734726758"))
+print(mask_account_card("Visa Classic 6831982476737658"))
+print(mask_account_card("Visa Platinum 8990922113665229"))
+print(mask_account_card("Visa Gold 5999414228426353"))
+print(mask_account_card("Счет 73654108430135874305"))

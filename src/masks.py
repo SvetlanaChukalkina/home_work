@@ -11,5 +11,3 @@ def get_mask_account(account_number: Union[str]) -> str:
     return f"**{account_number[-4:]}"
 
 
-print(get_mask_card_number("54690309983489"))
-print(get_mask_account("54690357876545678"))
