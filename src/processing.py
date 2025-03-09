@@ -1,4 +1,4 @@
-def filter_by_state(list_of_values: list, state: str = "EXECUTED") -> list:
+def filter_by_state(list_of_values: list[dict], state: str = "EXECUTED") -> list[dict]:
     """Возвращает список словарей, у которых ключ state соответствует указанному значению"""
     filter_list = []
     for value in list_of_values:
@@ -30,7 +30,7 @@ print(
 )
 
 
-def sort_by_date(list_of_values: list, reverse: bool = True) -> list:
+def sort_by_date(list_of_values: list[dict], reverse: bool = True) -> list[dict]:
     """Возвращает список, отсортированный по дате"""
     return sorted(list_of_values, key=lambda x: x["date"], reverse=reverse)
 
