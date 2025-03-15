@@ -26,13 +26,23 @@ def test_mask_account_not_correct_card(not_correct_string):
     assert mask_account_card("Visa Platinum 15557674757674576456") == not_correct_string
 
 
-#def test_get_mask_card_number(empty_string):
-   # assert get_mask_card_number("") == empty_string
+@pytest.mark.parametrize("value, expected",
+                         [("2024-03-11T02:26:18.671407", "11.03.2024"),
+                          ("2022-12-071T02:26:18.671407", "07.12.2022"),
+                          ("2021-05-201T02:26:18.671407", "20.05.2021"),
+                          ("2022-08-311T02:26:18.671407", "31.08.2022"),
+                          ("2022-06-301T02:26:18.671407", "30.06.2022")])
+def test_get_date(value, expected):
+    assert get_date(value) == expected
 
 
-#def test_get_mask_card_number(not_correct_string):
-  #  assert get_mask_card_number("700079228960636112121") == not_correct_string
+def test_get_not_correct_date(not_correct_string):
+    assert get_date("2024-15-11T02:26:18.671407") == not_correct_string
+    assert get_date("2024-10-41T02:26:18.671407") == not_correct_string
+    assert get_date("2A24-10-41T02:26:18.671407") == not_correct_string
+    assert get_date("2024-1T-41T02:26:18.671407") == not_correct_string
+    assert get_date("2024-10-N1T02:26:18.671407") == not_correct_string
 
 
-#def test_get_date():
-   # assert get_mask_account("73654108430135874305") == "**4305"
+def test_get_empty_date(empty_string):
+    assert get_date("") == empty_string
