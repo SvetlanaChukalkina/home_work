@@ -14,18 +14,15 @@ def mask_account_card(card_information: str) -> str:
     number_for_mask = "".join(card_or_account_num)
     name_for_mask = " ".join(card_name)
     if name_for_mask == "Счет":
+        if len(number_for_mask) < 6:
+            return "Данные введены неверно"
         return f"{name_for_mask} {get_mask_account(number_for_mask)}"
+    elif name_for_mask == "" or number_for_mask == "":
+        return "Данные не введены"
     else:
-        return f"{name_for_mask} {get_mask_card_number(number_for_mask)}"
-
-
-print(mask_account_card("Maestro 1596837868705199"))
-print(mask_account_card("Счет 64686473678894779589"))
-print(mask_account_card("MasterCard 7158300734726758"))
-print(mask_account_card("Visa Classic 6831982476737658"))
-print(mask_account_card("Visa Platinum 8990922113665229"))
-print(mask_account_card("Visa Gold 5999414228426353"))
-print(mask_account_card("Счет 73654108430135874305"))
+        if len(number_for_mask) == 16:
+            return f"{name_for_mask} {get_mask_card_number(number_for_mask)}"
+        return "Данные введены неверно"
 
 
 def get_date(date: str) -> str:

@@ -9,9 +9,3 @@ def empty_string():
 def not_correct_string():
     return "Данные введены неверно"
 
-
-#@pytest.mark.parametrize("value, expected", [
-#
-#])
-
-
