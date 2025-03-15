@@ -5,7 +5,12 @@ import pytest
 def empty_string():
     return "Данные не введены"
 
+
 @pytest.fixture
 def not_correct_string():
     return "Данные введены неверно"
 
+
+@pytest.fixture
+def missing_filter():
+    return "Выбранное значение отсутствует"
