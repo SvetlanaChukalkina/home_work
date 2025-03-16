@@ -1,16 +1,14 @@
 from datetime import datetime
+from typing import Any
 
 
-def filter_by_state(list_of_values: list[dict], state: str = "EXECUTED") -> list[dict]:
+def filter_by_state(list_of_values: list[dict[Any, Any]], state: str = "EXECUTED") -> list[dict[Any, Any]]:
     """Возвращает список словарей, у которых ключ state соответствует указанному значению"""
     filter_list = []
     for value in list_of_values:
         if value["state"] == state:
             filter_list.append(value)
-    if len(filter_list) > 0:
-        return filter_list
-    else:
-        return "Выбранное значение отсутствует"
+    return filter_list
 
 
 def sort_by_date(list_of_values: list[dict], reverse: bool = True) -> list[dict]:

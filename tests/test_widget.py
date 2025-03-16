@@ -3,7 +3,7 @@ import pytest
 from src.widget import get_date, mask_account_card
 
 
-def test_mask_account_card()-> None:
+def test_mask_account_card() -> None:
     assert mask_account_card("Maestro 1596837868705199") == "Maestro 1596 83** **** 5199"
     assert mask_account_card("Счет 64686473678894779589") == "Счет **9589"
 
@@ -18,15 +18,15 @@ def test_mask_account_card()-> None:
         ("Счет 73654108430135874305", "Счет **4305"),
     ],
 )
-def test_mask_account_types_of_card(value, expected):
+def test_mask_account_types_of_card(value: str, expected: str) -> None:
     assert mask_account_card(value) == expected
 
 
-def test_mask_account_empty(empty_string):
+def test_mask_account_empty(empty_string: str) -> None:
     assert mask_account_card("") == empty_string
 
 
-def test_mask_account_not_correct_card(not_correct_string):
+def test_mask_account_not_correct_card(not_correct_string: str) -> None:
     assert mask_account_card("Счет 5678") == not_correct_string
     assert mask_account_card("Visa Gold 15545678") == not_correct_string
     assert mask_account_card("Visa Platinum 15557674757674576456") == not_correct_string
@@ -42,11 +42,11 @@ def test_mask_account_not_correct_card(not_correct_string):
         ("2022-06-301T02:26:18.671407", "30.06.2022"),
     ],
 )
-def test_get_date(value, expected):
+def test_get_date(value: str, expected: str) -> None:
     assert get_date(value) == expected
 
 
-def test_get_not_correct_date(not_correct_string):
+def test_get_not_correct_date(not_correct_string: str) -> None:
     assert get_date("2024-15-11T02:26:18.671407") == not_correct_string
     assert get_date("2024-10-41T02:26:18.671407") == not_correct_string
     assert get_date("2A24-10-41T02:26:18.671407") == not_correct_string
@@ -54,5 +54,5 @@ def test_get_not_correct_date(not_correct_string):
     assert get_date("2024-10-N1T02:26:18.671407") == not_correct_string
 
 
-def test_get_empty_date(empty_string):
+def test_get_empty_date(empty_string: str) -> None:
     assert get_date("") == empty_string
