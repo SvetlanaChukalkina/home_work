@@ -48,6 +48,5 @@ def get_date(date: str) -> str:
         return "Данные введены неверно"
 
 
-
 print(get_date("2024-13-21T02:26:18.671407"))
 print(get_date("2024-13-11T02:26:18.671407"))

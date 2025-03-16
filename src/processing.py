@@ -1,5 +1,6 @@
 from datetime import datetime
 
+
 def filter_by_state(list_of_values: list[dict], state: str = "EXECUTED") -> list[dict]:
     """Возвращает список словарей, у которых ключ state соответствует указанному значению"""
     filter_list = []
