@@ -19,9 +19,15 @@ def card_number_generator(start: int, stop: int) -> Generator:
     for card_number in range(start, stop):
         if 1 <= card_number <= 9999999999999999:
             intermediate_string = (16 - len(str(card_number))) * "0" + str(card_number)
-            formatted_string = f'{intermediate_string[0:4]
-                                  + " " + intermediate_string[4:8] + " "
-                                  + intermediate_string[8:12] + " " + intermediate_string[-4:]}'
+            formatted_string = (
+                intermediate_string[0:4]
+                + " "
+                + intermediate_string[4:8]
+                + " "
+                + intermediate_string[8:12]
+                + " "
+                + intermediate_string[-4:]
+            )
             yield formatted_string
         else:
             print("Некорректный номер")
