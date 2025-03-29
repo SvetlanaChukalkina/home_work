@@ -25,6 +25,7 @@ def card_number_generator(start: int, stop: int) -> Generator:
                 + intermediate_string[4:8]
                 + " "
                 + intermediate_string[8:12]
+
                 + " "
                 + intermediate_string[-4:]
             )
