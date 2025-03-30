@@ -24,4 +24,4 @@ def test_log_error(capsys: Any) -> None:
 
     my_function(10, 0)
     captured = capsys.readouterr()
-    assert captured.out == "my_function error: division by zero. Inputs: (2, 0), {}\n"
+    assert captured.out == "my_function error: division by zero. Inputs: (10, 0), {}\n"
