@@ -1,17 +1,27 @@
-import pytest
+from typing import Any
+
 from src.decorators import log
 
-def test_log():
-    @log(filename="logs.txt")
-    def my_function(x, y):
+
+def test_log(capsys: Any) -> Any:
+    """Проверка вывода при корректной отработке функции"""
+
+    @log(filename=None)
+    def my_function(x: int | float, y: int | float) -> int | float:
         return x + y
-    assert(my_function(1, 2)) == 3
+
+    my_function(10, 20)
+    captured = capsys.readouterr()
+    assert captured.out == "my_function ok\n"
 
 
-def test_log_error():
-    @log
-    def my_function(x, y):
+def test_log_error(capsys: Any) -> None:
+    """Проверка вывода при выбрасывании ошибки division by zero"""
+
+    @log(filename=None)
+    def my_function(x: int | float, y: int | float) -> int | float:
         return x / y
-        with pytest.raises(ZeroDivisionError):
-            my_function(2, 0)
 
+    my_function(10, 0)
+    captured = capsys.readouterr()
+    assert captured.out == "my_function error: division by zero. Inputs: (2, 0), {}\n"
