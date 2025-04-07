@@ -2,12 +2,12 @@ import json
 import logging
 from typing import Any
 
-logger = logging.getLogger()
-file_handler = logging.FileHandler("../logs/utils.log", "w")
-file_formatter = logging.Formatter("%(asctime)s %(filename)s %(levelname)s: %(message)s")
-file_handler.setFormatter(file_formatter)
-logger.addHandler(file_handler)
-logger.setLevel(logging.DEBUG)
+utils_logger = logging.getLogger()
+utils_file_handler = logging.FileHandler("../logs/utils.log", "w")
+utils_file_formatter = logging.Formatter("%(asctime)s %(filename)s %(levelname)s: %(message)s")
+utils_file_handler.setFormatter(utils_file_formatter)
+utils_logger.addHandler(utils_file_handler)
+utils_logger.setLevel(logging.DEBUG)
 
 
 def get_transactions_info(path: str) -> list[dict[Any, Any]]:
@@ -16,11 +16,11 @@ def get_transactions_info(path: str) -> list[dict[Any, Any]]:
         with open(path, "r", encoding="utf-8") as json_file:
             try:
                 transaction_list = list(json.load(json_file))
-                logger.info("Data is load")
+                utils_logger.info("Data is load")
                 return transaction_list
             except json.JSONDecodeError:
-                logger.error("Incorrect format")
+                utils_logger.error("Incorrect format")
                 return []
     except FileNotFoundError:
-        logger.error("File not found")
+        utils_logger.error("File not found")
         return []
