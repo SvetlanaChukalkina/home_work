@@ -31,3 +31,4 @@ def get_mask_account(account_number: Union[str]) -> str:
         return "Данные не введены"
     masks_logger.error("Not correct data")
     return "Данные введены неверно"
+

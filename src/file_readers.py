@@ -11,10 +11,7 @@ def csv_reader (path):
     except FileNotFoundError:
         return []
 
-
-#path = os.path.abspath("../data/transactions.csv")
-#print(csv_reader(path))
-
+#path = os.path.abspath("../data/transactions.csv") #print(csv_reader(path))
 
 def excel_reader (path):
     """Cчитывает данные из Excel-файла, возвращает список словарей с транзакциями"""
@@ -24,5 +21,4 @@ def excel_reader (path):
         return excel_data_list
     except FileNotFoundError:
         return []
-#print(excel_reader("../data/transactions_excel.xlsx"))
-#print(excel_reader("../data/tranfddfgfdfsactions_excel.xlsx"))
+#print(excel_reader("../data/transactions_excel.xlsx")) #print(excel_reader("../data/tranfddfgfdfsactions_excel.xlsx"))
