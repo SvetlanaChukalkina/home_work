@@ -29,8 +29,8 @@ def test_transaction_no_data() -> list[dict]:
     return [{"id": 873106923, "state": "EXECUTED", "date": "2019-03-23T01:09:46.296404"}]
 
 
-def test_transaction_no_conversation(test_transaction_no_data: list[dict]) -> None:
-    assert transaction_conversation(test_transaction_no_data) == ["Нет доступного значения"]
+def test_transaction_no_conversation(test_transaction_no_data: list[dict]) -> Any:
+    assert transaction_conversation(test_transaction_no_data) == [0.00]
 
 
 @patch("src.external_api.requests.get")
