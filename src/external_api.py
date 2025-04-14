@@ -28,18 +28,16 @@ def transaction_conversation(transaction_data_list: list[dict[Any, Any]]) -> lis
     sum_list = []
     for transaction in transaction_data_list:
         if "operationAmount" in transaction:
-            amount = float(transaction["operationAmount"]["amount"])
+            amount = transaction["operationAmount"]["amount"]
             currency = transaction["operationAmount"]["currency"]["code"]
             if currency == "EUR" or currency == "USD":
-                transaction_sum = float(
-                    conversation(
-                        amount=transaction["operationAmount"]["amount"],
-                        currency=transaction["operationAmount"]["currency"]["code"],
-                    )
+                transaction_sum = conversation(
+                    amount=transaction["operationAmount"]["amount"],
+                    currency=transaction["operationAmount"]["currency"]["code"],
                 )
-                sum_list.append(transaction_sum)
+                sum_list.append(float(transaction_sum))
             elif currency == "RUB":
-                sum_list.append(amount)
+                sum_list.append(float(amount))
         else:
-            sum_list.append("Нет доступного значения")
+            sum_list.append(0.00)
     return sum_list
