@@ -33,32 +33,16 @@ def test_transaction_no_conversation(test_transaction_no_data: list[dict]) -> An
     assert transaction_conversation(test_transaction_no_data) == [0.00]
 
 
-@patch("src.external_api.requests.get")
-def test_api_transaction_conversation(mock_request: Any) -> Any:
-    """Проверка работы функции при необходимости обращения к внешнему API"""
+@patch('src.external_api.conversation')
+def test_transaction_conversation_without_requests(convers_mock):
     test_data = [
-        {
-            "id": 142264268,
-            "state": "EXECUTED",
-            "date": "2019-04-04T23:20:05.206878",
-            "operationAmount": {"amount": "79114.93", "currency": {"name": "USD", "code": "USD"}},
-            "description": "Перевод со счета на счет",
-            "from": "Счет 19708645243227258542",
-            "to": "Счет 75651667383060284188",
-        },
-        {
-            "id": 873106923,
-            "state": "EXECUTED",
-            "date": "2019-03-23T01:09:46.296404",
-            "operationAmount": {"amount": "318.34", "currency": {"name": "EUR", "code": "EUR"}},
-            "description": "Перевод со счета на счет",
-            "from": "Счет 44812258784861134719",
-            "to": "Счет 74489636417521191160",
-        },
+        {'operationAmount': {'amount': 15.57, 'currency': {'code': 'RUB'}}},
+        {'no_needed_key': 'ok'},
+        {'operationAmount': {'amount': 100, 'currency': {'code': 'USD'}}},
+        {'operationAmount': {'amount': 200, 'currency': {'code': 'EUR'}}},
     ]
-
-    mock_request.return_value.status_code = 200
-    mock_request.return_value.json.return_value = [6677989.02481, 29448.907585]
-
+    convers_mock.side_effect = [2.05, 7.97]
     result = transaction_conversation(test_data)
-    assert result == [6677989.02481, 29448.907585]
+
+    assert result == [15.57, 0.0, 2.05, 7.97]
+    assert convers_mock.call_count == 2

@@ -14,7 +14,7 @@ def conversation(currency: str, amount: str) -> Any:
     url = "https://api.apilayer.com/exchangerates_data/convert"
     payload = {"to": "RUB", "from": currency, "amount": amount}
     headers = {"apikey": API_KEY}
-    response = requests.request("GET", url, headers=headers, params=payload)
+    response = requests.get(url, headers=headers, params=payload)
 
     status_code = response.status_code
     if status_code == 200:
