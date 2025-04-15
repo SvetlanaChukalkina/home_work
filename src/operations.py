@@ -10,15 +10,24 @@ def transactions_search(operation_list, search_string):
         if "description" in operation:
             if pattern.findall(operation["description"]):
                 search_result.append(operation)
+    if len(search_result) == 0:
+        return "Указанная строка не найдена"
     return search_result
 
 
 def transactions_counter(banking_list, categories):
     """Принимает данные о банковских операциях и список их категорий, возвращает словарь,
     где ключи — названия категорий, а значения — количество операций в них"""
-    filtered_banking_list = []
-    for operation in banking_list:
-        if operation["description"] in categories:
-            filtered_banking_list.append(operation["description"])
+    if len(categories) == 0:
+        return "Категории не выбраны"
+    else:
+        filtered_banking_list = []
+        for operation in banking_list:
+            if "description" in operation and operation["description"] in categories:
+                filtered_banking_list.append(operation["description"])
         counter = Counter(filtered_banking_list)
+        for category in categories:
+            if category not in counter.keys():
+                zero_counter = {category : 0}
+                counter.update(zero_counter)
     return dict(counter)
