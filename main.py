@@ -73,7 +73,7 @@ def main():
             for i in sorted_filtered_transaction:
                 if pattern.findall(i['operationAmount']['currency']['code']):
                     update_list.append(i)
-        elif user_input_currency == "нет":
+        else:
             update_list = sorted_filtered_transaction
         # for up in update_list:
         #     print(up)
@@ -93,33 +93,30 @@ def main():
         for fi in final_list:
             unformatted_date = fi["date"]
             formatted_date = get_date(unformatted_date)
-
-
-            operation_name = fi["description"]
             operation_sum = fi['operationAmount']['amount'] + fi['operationAmount']['currency']['name']
-            sender = fi['from']
-            if "Счет" in sender:
-                mask_sender = get_mask_account(sender)
-            elif "Счет" not in sender:
-                mask_sender = mask_account_card(sender)
+            operation_name = fi["description"]
             receiver = fi['to']
             if "Счет" in receiver:
                 mask_receiver = get_mask_account(receiver)
             elif "Счет" not in receiver:
                 mask_receiver = mask_account_card(receiver)
+            sender = fi['to']
+            if "Счет" in sender:
+                mask_sender = get_mask_account(sender)
+            elif "Счет" not in sender:
+                mask_sender = mask_account_card(sender)
+
+            if operation_name != "Открытие вклада":
 
 
-            # print(fi)
+                print(f"""{formatted_date}  {operation_name},
+                {mask_sender} -> {mask_receiver},
+                Сумма: {operation_sum}""")
+            else:
+                print(f"""{formatted_date} {operation_name},{mask_receiver},
+                Сумма: {operation_sum}""")
 
-            if sender and receiver:
-                print(f"""{formatted_date}  {operation_name}, {mask_sender} -> {mask_receiver},
-                Сумма: {operation_sum}""")
-            elif sender and not receiver:
-                print(f"""{formatted_date}  {operation_name} {mask_sender},
-                Сумма: {operation_sum}""")
-            elif receiver and not sender:
-                print(f"""{formatted_date}  {operation_name} {mask_receiver},
-                Сумма: {operation_sum}""")
+
 
 #     print(f"""Всего банковских операций в выборке:
 
@@ -130,16 +127,6 @@ def main():
     # 12.11.2019 Перевод с карты на карту
     # MasterCard 7771 27  3727 -> Visa Platinum 1293 38 **** 9203
     # Сумма: 130 USD
-    # 
-    # 18.07.2018 Перевод организации 
-    # Visa Platinum 7492 65  7202 -> Счет 0034
-    # Сумма: 8390 руб.
-    # 
-    # 03.06.2018 Перевод со счета на счет
-    # Счет 2935 -> Счет 4321
-    # Сумма: 8200 EUR""")
-
-
+    #
 
 main()
-#
