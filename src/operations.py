@@ -1,6 +1,7 @@
 import re
 from collections import Counter
 
+
 def transactions_search(operation_list, search_string):
     """Принимает список словарей с данными и строку поиска, возвращает список словарей,
     в описании которых есть данная строка"""
@@ -28,6 +29,6 @@ def transactions_counter(banking_list, categories):
         counter = Counter(filtered_banking_list)
         for category in categories:
             if category not in counter.keys():
-                zero_counter = {category : 0}
+                zero_counter = {category: 0}
                 counter.update(zero_counter)
     return dict(counter)

@@ -33,13 +33,13 @@ def test_transaction_no_conversation(test_transaction_no_data: list[dict]) -> An
     assert transaction_conversation(test_transaction_no_data) == [0.00]
 
 
-@patch('src.external_api.conversation')
+@patch("src.external_api.conversation")
 def test_transaction_conversation_without_requests(convers_mock):
     test_data = [
-        {'operationAmount': {'amount': 15.57, 'currency': {'code': 'RUB'}}},
-        {'no_needed_key': 'ok'},
-        {'operationAmount': {'amount': 100, 'currency': {'code': 'USD'}}},
-        {'operationAmount': {'amount': 200, 'currency': {'code': 'EUR'}}},
+        {"operationAmount": {"amount": 15.57, "currency": {"code": "RUB"}}},
+        {"no_needed_key": "ok"},
+        {"operationAmount": {"amount": 100, "currency": {"code": "USD"}}},
+        {"operationAmount": {"amount": 200, "currency": {"code": "EUR"}}},
     ]
     convers_mock.side_effect = [2.05, 7.97]
     result = transaction_conversation(test_data)
