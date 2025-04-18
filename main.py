@@ -122,44 +122,46 @@ def main():
     print("Распечатываю итоговый список транзакций...")
     print(f"""Всего банковских операций в выборке: {len(final_list)}""")
 
-    for fi in final_list:
-        unformatted_date = fi["date"]
-        formatted_date = get_date(unformatted_date)
-        if user_choise == "JSON":
-            operation_sum = fi['operationAmount']['amount'] + fi['operationAmount']['currency']['name']
-            operation_name = fi["description"]
-        elif user_choise == "CSV" or user_choise == "XLSX":
-            operation_sum = fi['amount'],  fi['currency_name']
-            operation_name = fi["description"]
-        receiver =str(fi['to'])
-        if "Счет" in receiver:
-            mask_receiver = get_mask_account(receiver)
-            if mask_receiver == "Данные не введены":
-                mask_receiver = receiver
-        elif "Счет" not in receiver:
-            mask_receiver = mask_account_card(receiver)
-            if mask_receiver == "Данные не введены":
-                mask_receiver = receiver
-        else:
-            mask_receiver = receiver
-        sender = str(fi['from'])
-        if "Счет" in sender:
-            mask_sender = get_mask_account(sender)
-            if mask_sender == "Данные не введены":
-                mask_sender = sender
-        elif "Счет" not in sender:
-            mask_sender = mask_account_card(sender)
-            if mask_sender == "Данные не введены":
-                mask_sender = sender
+    print(final_list)
+    # for fi in final_list:
+    #     print(fi)
+        # unformatted_date = fi["date"]
+        # print(unformatted_date)
+        # print(type(unformatted_date))
+
+        # formatted_date = get_date(unformatted_date)
+        # print(formatted_date)
 
 
-        if operation_name != "Открытие вклада":
-            print(f"""{formatted_date}  {operation_name},
-            {mask_sender} -> {mask_receiver},
-            Сумма: {operation_sum}""")
-        else:
-            print(f"""{formatted_date} {operation_name},{mask_receiver},
-            Сумма: {operation_sum}""")
+
+
+        # if user_choise == "JSON":
+        #     operation_sum = float(fi['operationAmount']['amount'])
+        #     operation_currency = fi['operationAmount']['currency']['name']
+        #     operation_name = fi["description"]
+        # elif user_choise == "CSV" or user_choise == "XLSX":
+        #     operation_sum = float(fi['amount'])
+        #     operation_currency = fi['currency_name']
+        #     operation_name = fi["description"]
+        #
+        #
+        # try:
+        #     mask_receiver = mask_account_card(str(fi['to']))
+        #     mask_sender = mask_account_card(str(fi['from']))
+        # except KeyError:
+        #     mask_sender = []
+        # if mask_sender == "Данные не введены":
+        #     mask_sender = []
+        #
+        #
+        # if mask_sender != []:
+        #     print(f"""{formatted_date}  {operation_name},
+        #     {mask_sender} -> {mask_receiver},
+        #     Сумма: {operation_sum}, {operation_currency}""")
+        # else:
+        #     print(f"""{formatted_date} {operation_name},
+        #     {mask_receiver},
+        #     Сумма: {operation_sum} {operation_currency}""")
 
 
 main()

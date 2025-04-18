@@ -11,7 +11,7 @@ masks_logger.setLevel(logging.DEBUG)
 
 def get_mask_card_number(card_number: Union[str]) -> str:
     """Функция принимает номер карты в виде числа и возвращает маску XXXX XX** **** XXXX"""
-    if len(card_number) == 16:
+    if len(card_number) >= 16:
         masks_logger.info("Card number is correct")
         return f"{card_number[:4]} {card_number[4:6]}** **** {card_number[-4:]}"
     elif len(card_number) == 0:
