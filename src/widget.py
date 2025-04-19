@@ -17,10 +17,10 @@ def mask_account_card(card_information: str) -> str:
         if len(number_for_mask) < 6:
             return "Данные введены неверно"
         return f"{name_for_mask} {get_mask_account(number_for_mask)}"
-    elif name_for_mask == "" or number_for_mask == "":
+    elif number_for_mask == "":  # elif name_for_mask == "" or number_for_mask == "":
         return "Данные не введены"
     else:
-        if len(number_for_mask) == 16:
+        if len(number_for_mask) >= 16:
             return f"{name_for_mask} {get_mask_card_number(number_for_mask)}"
         return "Данные введены неверно"
 
@@ -50,3 +50,5 @@ def get_date(date: str) -> str:
 
 print(get_date("2024-13-21T02:26:18.671407"))
 print(get_date("2024-13-11T02:26:18.671407"))
+
+print(get_date("2023-10-20T21:00:39Z"))

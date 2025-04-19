@@ -7,8 +7,8 @@ import pandas as pd
 def csv_reader(path: str, delimiter: str = ";") -> list[dict[Any, Any]]:
     """Cчитывает данные из CSV-файла, возвращает список словарей с транзакциями"""
     try:
-        with open(path) as csv_file:
-            reader = csv.DictReader(csv_file, delimiter=";")
+        with open(path, encoding="utf-8") as csv_file:
+            reader = csv.DictReader(csv_file, delimiter=delimiter)
             return list(reader)
     except FileNotFoundError:
         return []

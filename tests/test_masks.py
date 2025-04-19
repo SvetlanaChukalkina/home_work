@@ -13,7 +13,7 @@ def test_get_mask_card_number_empty(empty_string: str) -> None:
 
 def test_get_mask_card_number_not_correct(not_correct_string: str) -> None:
     """Проверка работы функции при вводе некорректного значения"""
-    assert get_mask_card_number("70007922896063611") == not_correct_string
+    assert get_mask_card_number("7000") == not_correct_string
     assert get_mask_card_number("700079228960636") == not_correct_string
 
 

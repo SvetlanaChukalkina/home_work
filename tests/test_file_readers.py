@@ -16,7 +16,7 @@ from src.file_readers import csv_reader, excel_reader
 def test_csv_reader(mock_csv: Any, mock_open: Any) -> None:
     """Проверка корректности работы функции c CSV-файлом"""
     csv_reader("fake_path.csv", delimiter=";")
-    mock_open.assert_called_once_with("fake_path.csv")
+    mock_open.assert_called_once_with("fake_path.csv", encoding="utf-8")
     mock_csv.assert_called_once_with(mock_open(), delimiter=";")
 
 

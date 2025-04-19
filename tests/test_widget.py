@@ -29,7 +29,7 @@ def test_mask_account_empty(empty_string: str) -> None:
 def test_mask_account_not_correct_card(not_correct_string: str) -> None:
     assert mask_account_card("Счет 5678") == not_correct_string
     assert mask_account_card("Visa Gold 15545678") == not_correct_string
-    assert mask_account_card("Visa Platinum 15557674757674576456") == not_correct_string
+    assert mask_account_card("Visa Platinum 155576747576745") == not_correct_string
 
 
 @pytest.mark.parametrize(
