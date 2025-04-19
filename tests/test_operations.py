@@ -1,9 +1,12 @@
+from typing import Any
+
 import pytest
-from src.operations import transactions_search, transactions_counter
+
+from src.operations import transactions_counter, transactions_search
 
 
 @pytest.fixture
-def operations_data():
+def operations_data() -> list[dict]:
     return [
         {"id": 12341234, "date": "2019-02-04T23:20:00.206878", "description": "Перевод со счета на счет"},
         {"id": 23452345, "date": "2019-03-04T23:20:01.206878", "description": "Перевод со счета на счет"},
@@ -12,7 +15,7 @@ def operations_data():
     ]
 
 
-def test_transactions_search(operations_data):
+def test_transactions_search(operations_data: list[dict[Any, Any]]) -> None:
     """Проверка корректности работы функции с заданным значением для поиска"""
     # test_operation_list = list(operations_data())
     assert transactions_search(operations_data, search_string="Перевод") == [
@@ -31,7 +34,7 @@ def test_transactions_search(operations_data):
     )
 
 
-def test_transactions_counter(operations_data):
+def test_transactions_counter(operations_data: list[dict]) -> None:
     """Проверка корректности работы функции с различными вариантами списков категорий"""
     assert transactions_counter(operations_data, categories=[]) == "Категории не выбраны"
     assert transactions_counter(operations_data, categories=["Перевод со счета на счет", "Перевод организации"]) == {

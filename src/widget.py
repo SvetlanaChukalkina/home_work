@@ -17,7 +17,7 @@ def mask_account_card(card_information: str) -> str:
         if len(number_for_mask) < 6:
             return "Данные введены неверно"
         return f"{name_for_mask} {get_mask_account(number_for_mask)}"
-    elif number_for_mask == "":   #elif name_for_mask == "" or number_for_mask == "":
+    elif number_for_mask == "":  # elif name_for_mask == "" or number_for_mask == "":
         return "Данные не введены"
     else:
         if len(number_for_mask) >= 16:

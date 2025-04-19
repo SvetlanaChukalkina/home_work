@@ -1,8 +1,9 @@
 import re
 from collections import Counter
+from typing import Any
 
 
-def transactions_search(operation_list, search_string):
+def transactions_search(operation_list: list[dict], search_string: str) -> list[dict[Any, Any]] | str:
     """Принимает список словарей с данными и строку поиска, возвращает список словарей,
     в описании которых есть данная строка"""
     search_result = []
@@ -16,7 +17,7 @@ def transactions_search(operation_list, search_string):
     return search_result
 
 
-def transactions_counter(banking_list, categories):
+def transactions_counter(banking_list: list[dict], categories: list) -> dict[Any, Any] | str:
     """Принимает данные о банковских операциях и список их категорий, возвращает словарь,
     где ключи — названия категорий, а значения — количество операций в них"""
     if len(categories) == 0:
